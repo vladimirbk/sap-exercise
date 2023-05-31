@@ -1,0 +1,25 @@
+{
+
+        "Employees":[
+            {
+                "ID":"Emp1",
+                "IsManager":false,
+                "Manager":"Emp3"
+            },
+            {
+                "ID":"Emp2",
+                "IsManager":true
+            },
+            {
+                "ID":"Emp3",
+                "IsManager":true,
+                "Manager":"Emp2"
+            },
+            {
+                "ID":"Emp4",
+                "IsManager":false,
+                "Manager":"Emp2"
+            }
+        ]
+
+}

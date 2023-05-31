@@ -1,0 +1,16 @@
+{
+  "name": "Exercise 2",
+  "version": "1.0.0",
+  "description": "SAP homework - exercise #2",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Vladimir Badashkhanov",
+  "license": "ISC",
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "xmlbuilder2": "^3.1.1"
+  },
+  "dependencies": {
+    "xml-js": "^1.6.11"
+  }
+}
