@@ -17,7 +17,7 @@ def exerciseA() {
 }
 
 def exerciseB() {
-  data["Employees"] = data["Employees"].findAll {
+  def managers = dataTest = data["Employees"].findAll {
     it["IsManager"] == true
   }
 
