@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "SAP homework - exercise #2",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "npm run solution1 && npm run solution2",
+    "solution1": "cd src && node xmlBuilder.js",
+    "solution2": "cd src/solution2 && node xmlBuilder.js"
+  },
   "author": "Vladimir Badashkhanov",
   "license": "ISC",
   "devDependencies": {
