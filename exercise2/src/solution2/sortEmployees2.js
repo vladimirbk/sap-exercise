@@ -23,7 +23,8 @@ let managers = [];
 //Map employees object
 function mapEmployeesObject() {
     for (let i = 0; i < employees.length; i++) {
-        let employeeObject = {}
+        const employeeObject = {}
+
         for (let j = 0; j < employees[i].childNodes.length; j++) {
             employeeObject[employees[i].childNodes[j].nodeName] = employees[i].childNodes[j].innerHTML
         }
@@ -34,7 +35,7 @@ function mapEmployeesObject() {
 //Build hierarchy tree containing manager and corresponding subordinates
 function buildHierarchyTree() {
     for (let manager of managers) {
-        let subordinates = [];
+        const subordinates = [];
 
         for (let i = 0; i < mappedEmployees.length; i++) {
             if (mappedEmployees[i].managerId === manager.empId) {

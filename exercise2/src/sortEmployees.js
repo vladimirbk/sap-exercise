@@ -3,15 +3,14 @@ const parser = require('xml-js');
 
 const xmlData = fs.readFileSync('../data/employeesIn.xml', { encoding: 'utf-8' });
 const jsonData = parser.xml2json(xmlData, { compact: true, spaces: 4 });
-
-let employees = JSON.parse(jsonData).root.employee;
-let output = [];
-let hierarchyTree = [];
-let managers = employees.filter(employee => employee.isManager._text === 'Y');
+const employees = JSON.parse(jsonData).root.employee;
+const output = [];
+const hierarchyTree = [];
+const managers = employees.filter(employee => employee.isManager._text === 'Y');
 
 function buildHierarchyTree() {
 	for (let manager of managers) {
-		let subordinates = [];
+		const subordinates = [];
 
 		for (let i = 0; i < employees.length; i++) {
 			if (!employees[i].managerId) continue;
