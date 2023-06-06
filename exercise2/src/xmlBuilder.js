@@ -28,7 +28,7 @@ for (let employee of output) {
 const doc = create(xmlStr);
 const xml = doc.end({ prettyPrint: true });
 
-fs.writeFile('employeesSorted.xml', xml, (err) => {
+fs.writeFile('./dist/employeesSorted.xml', xml, (err) => {
 	if (err) {
 		console.error('Error writing XML file:', err);
 	} else {
