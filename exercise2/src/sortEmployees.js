@@ -10,38 +10,52 @@ let hierarchyTree = [];
 let managers = employees.filter(employee => employee.isManager._text === 'Y');
 
 function buildHierarchyTree() {
-    for (let manager of managers) {
-        let subordinates = [];
+	for (let manager of managers) {
+		let subordinates = [];
 
-        for (let i = 0; i < employees.length; i++) {
-            if (!employees[i].managerId) continue;
+		for (let i = 0; i < employees.length; i++) {
+			if (!employees[i].managerId) continue;
 
-            if (employees[i].managerId._text === manager.empId._text) {
-                subordinates.push(employees[i])
-            }
-        }
+			if (employees[i].managerId._text === manager.empId._text) {
+				subordinates.push(employees[i])
+			}
+		}
 
-        let managerNode = { "manager": manager, "subordinates": subordinates }
-        hierarchyTree.push(managerNode);
-    }
+		let managerNode = { "manager": manager, "subordinates": subordinates }
+		hierarchyTree.push(managerNode);
+	}
 }
 
-//Sorting algorithm is not finished
-function sortEmployees() {
-    hierarchyTree.forEach(node => {
-        if (node.manager.position._text === 'ceo') {
-            output.push(node.manager);
+function setRoot(hierarchyTree) {
+	hierarchyTree.forEach(node => {
+		if (node.manager.position._text === 'ceo') {
+			output.push(node.manager);
+			output.push(...node.subordinates);
 
-            node.subordinates.forEach(subordinate => {
-                output.push(subordinate);
-            })
+			hierarchyTree.splice(hierarchyTree.indexOf(node), 1);
+		}
+	});
+}
 
-            hierarchyTree.splice(hierarchyTree.indexOf(node, 1));
-        }
-    });
+function sortEmployees(hierarchyTree) {
+	let i = 1;
+
+	while (i < output.length) {
+		hierarchyTree.forEach(node => {
+			if (output[i].empId._text === node.manager.empId._text) {
+				output.push(...node.subordinates);
+				hierarchyTree.splice(hierarchyTree.indexOf(node), 1);
+			}
+		});
+
+		i++;
+	}
+
+	if (hierarchyTree.length > 0) sortEmployees(hierarchyTree);
 }
 
 buildHierarchyTree();
-sortEmployees();
+setRoot(hierarchyTree);
+sortEmployees(hierarchyTree);
 
 module.exports = output;
