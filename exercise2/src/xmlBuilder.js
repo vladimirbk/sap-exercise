@@ -8,20 +8,20 @@ for (let employee of output) {
 	if (!employee.managerId) {
 		xmlStr = xmlStr +
 			`<employee>
-                <empId>${employee.empId._text}</empId>
-                <empName>${employee.empName._text}</empName>
-		        <position>${employee.position._text}</position>
-		        <isManager>${employee.isManager._text}</isManager>  
-            </employee>`
+				<empId>${employee.empId._text}</empId>
+				<empName>${employee.empName._text}</empName>
+				<position>${employee.position._text}</position>
+				<isManager>${employee.isManager._text}</isManager>  
+			</employee>`
 	} else {
 		xmlStr = xmlStr +
 			`<employee>
-            <empId>${employee.empId._text}</empId>
-            <empName>${employee.empName._text}</empName>
-		    <position>${employee.position._text}</position>
-		    <managerId>${employee.managerId._text}</managerId>
-		    <isManager>${employee.isManager._text}</isManager>  
-        </employee>`
+				<empId>${employee.empId._text}</empId>
+				<empName>${employee.empName._text}</empName>
+				<position>${employee.position._text}</position>
+				<managerId>${employee.managerId._text}</managerId>
+				<isManager>${employee.isManager._text}</isManager>  
+			</employee>`
 	}
 }
 
