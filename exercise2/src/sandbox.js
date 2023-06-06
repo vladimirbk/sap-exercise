@@ -81,8 +81,6 @@ function buildHierarchyTree() {
     let subordinates = [];
 
     for (let i = 0; i < employees.length; i++) {
-      // if (!employees[i].managerId) continue;
-
       if (employees[i].managerId === manager.empId) {
         subordinates.push(employees[i])
       }
@@ -93,19 +91,44 @@ function buildHierarchyTree() {
   }
 }
 
-function sortEmployees() {
+function setRoot(hierarchyTree) {
   hierarchyTree.forEach(node => {
     if (node.manager.position === 'ceo') {
       result.push(node.manager);
+      result.push(...node.subordinates);
 
-      node.subordinates.forEach(subordinate => {
-        result.push(subordinate);
-      })
-
-      hierarchyTree.splice(hierarchyTree.indexOf(node, 1));
+      hierarchyTree.splice(hierarchyTree.indexOf(node), 1);
     }
   });
 }
 
+function sortEmployees(hierarchyTree) {
+  let i = 1;
+  
+  while(i < result.length) {
+    hierarchyTree.forEach(node => {
+      if (result[i].empId === node.manager.empId) {
+        result.push(...node.subordinates);
+        hierarchyTree.splice(hierarchyTree.indexOf(node), 1);
+      }
+    });
+
+    i++;
+  }
+
+  if (hierarchyTree.length > 0) sortEmployees(hierarchyTree);
+}
+
 buildHierarchyTree();
-sortEmployees();
+setRoot(hierarchyTree);
+sortEmployees(hierarchyTree);
+
+var fs = require('fs');
+fs.writeFile("sorted.json", JSON.stringify(result), function (err, result) {
+  if (err) console.log('error', err);
+});
+
+
+fs.writeFile("hierarchyTree.json", JSON.stringify(hierarchyTree), function (err, result) {
+  if (err) console.log('error', err);
+});
